@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springboot.mapper.UserMapper">
+    <insert id="saveUser">
+        insert into smbms_user(userName, userPassword, userRole, address, phone)
+        values (#{userName}, #{userPassword}, #{userRoleName}, #{address}, #{phone})
+    </insert>
+
+    <select id="Login" resultType="com.springboot.pojo.User">
+        select u.userName, u.userPassword
+        from smbms_user u
+        where userName = #{userName}
+          and userPassword = #{userPassword}
+    </select>
+    <select id="getUserList" parameterType="com.springboot.pojo.User" resultType="com.springboot.pojo.User"
+            resultMap="userListMap">
+        select u.*,r.* from smbms_user u,smbms_role r
+        <where>
+            u.userRole=r.id
+            <if test="seleceText != null and seleceText != ''">
+                and u.userName like concat('%' , #{seleceText} ,'%')
+            </if>
+        </where>
+    </select>
+    <resultMap id="userListMap" type="User" autoMapping="true">
+        <result property="userRoleName" column="roleName"/>
+    </resultMap>
+
+
+    <select id="count" resultType="int">
+        select count(1)
+        from smbms_user
+    </select>
+    <delete id="deleteUserById">
+        delete
+        from smbms_user
+        where id = #{id}
+    </delete>
+
+    <select id="userinfo" resultType="com.springboot.pojo.User" resultMap="userListMap">
+        select u.*, r.*
+        from smbms_user u,
+             smbms_role r
+        where u.userRole = r.id
+          and u.id = #{id}
+    </select>
+</mapper>
