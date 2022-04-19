@@ -29,16 +29,16 @@ public class OSSController {
     @GetMapping("/getOSS")
     public ResultResponse policy() {
         // 阿里云账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM用户进行API访问或日常运维，请登录RAM控制台创建RAM用户。
-        String accessId = "LTAI5tDRsTNJazWk3fEwZqZc";
-        String accessKey = "vRHRWfUfYSsTDo9Woij1NUR2aMlhrH";
+        String accessId = "*******";
+        String accessKey = "********";
         // Endpoint以华东1（杭州）为例，其它Region请按实际情况填写。
-        String endpoint = "oss-cn-beijing.aliyuncs.com";
+        String endpoint = "*********";
         // 填写Bucket名称，例如examplebucket。
-        String bucket = "sv-mall";
+        String bucket = "**********";
         // 填写Host名称，格式为https://bucketname.endpoint。
         String host = "https://" + bucket + "." + endpoint;
         // 设置上传回调URL，即回调服务器地址，用于处理应用服务器与OSS之间的通信。OSS会在文件上传完成后，把文件上传信息通过此回调URL发送给应用服务器。
-        String callbackUrl = "https://192.168.0.0:8888";
+        String callbackUrl = "************";
         // 设置上传到OSS文件的前缀，可置空此项。置空后，文件将上传至Bucket的根目录下。
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String date = dateFormat.format(new Date());
