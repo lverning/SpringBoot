@@ -33,5 +33,4 @@ public class CustomerExceptionHandler {
         log.error("空指针异常！", e);
         return Result.error(ResultMsgEnum.COUNT.getCode(), ResultMsgEnum.COUNT.getMessage());
     }
-
 }
